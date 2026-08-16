@@ -1,116 +1,154 @@
-This folder contains the template code for a search engine application.
+# Information Retrieval System using TF-IDF and Vector Space Model
 
-Project Structure
------------------
-Cranfield Dataset NLP/
-│
-├── cranfield/
-│   ├── cran_docs.json
-│   ├── cran_queries.json
-│   ├── cran_qrels.json
-│   └── README.txt
-│
-└── template_code_part1/
-    ├── main.py
-    ├── sentenceSegmentation.py
-    ├── tokenization.py
-    ├── inflectionReduction.py
-    ├── stopwordRemoval.py
-    └── util.py
+An Information Retrieval (IR) system implemented using the **Vector Space Model (VSM)** and **TF-IDF** document representation. The project covers the complete IR pipeline, from document indexing and retrieval to evaluating retrieval effectiveness on the **Cranfield Dataset** using standard IR metrics. :contentReference[oaicite:0]{index=0}
 
+---
 
-Files Description
------------------
+## Features
 
-main.py
-    The main module that contains the outline of the Search Engine.
-    It handles preprocessing of queries and documents.
-    The output folder is automatically created if it does not exist.
+- TF-IDF based document representation
+- Vector Space Model (VSM)
+- Cosine Similarity based document ranking
+- Inverted Index construction
+- Query preprocessing and retrieval
+- Cranfield Dataset evaluation
+- Comprehensive IR evaluation metrics
+- Performance visualization
 
-sentenceSegmentation.py
-    Implement sentence segmentation methods:
-        - naive
-        - punkt
-        - (optional) spacySegmenter
+---
 
-tokenization.py
-    Implement tokenization methods:
-        - naive
-        - Penn Treebank (ptb)
-        - (optional) spacyTokenizer
+## Implementation
 
-inflectionReduction.py
-    Implement:
-        - Porter Stemmer
-        - WordNet Lemmatizer
+The retrieval system follows the traditional Information Retrieval pipeline:
 
-stopwordRemoval.py
-    Implement stopword removal using NLTK or corpus-based methods.
+1. Document preprocessing
+   - Tokenization
+   - Lowercasing
+   - Stop-word removal
 
-util.py
-    Optional helper functions.
+2. Document indexing
+   - TF-IDF Vectorization
+   - Sparse document-term matrix generation
 
+3. Query processing
+   - Query preprocessing
+   - TF-IDF transformation
+   - Cosine similarity computation
 
-How to Run
-----------
+4. Ranking
+   - Documents ranked according to cosine similarity scores. :contentReference[oaicite:1]{index=1}
 
-From inside template_code_part1:
+---
 
-If cranfield folder is inside the same parent directory:
+## Assignment Tasks
 
-    python main.py -dataset ../cranfield
+### Part 1 – Toy Information Retrieval System
 
-If cranfield folder is inside the same directory:
+- Tokenization
+- Stop-word removal
+- Inverted Index construction
+- TF-IDF computation
+- Boolean Retrieval
+- Cosine Similarity computation
+- Document Ranking
+- Analysis of word sense ambiguity
 
-    python main.py -dataset cranfield
+### Part 2 – Building the IR System
 
-Custom Query Mode:
+Implemented:
 
-    python main.py -dataset ../cranfield -custom
+- TF-IDF Vector Space Model
+- Build Index function
+- Rank function
+- Cosine Similarity based retrieval
 
-When -custom flag is passed, the system will prompt for a query:
+### Part 3 – Evaluation
 
-    Enter query below
-    Papers on Aerodynamics
+Implemented the following evaluation metrics:
 
-Output
-------
+- Precision@k
+- Recall@k
+- F0.5 Score
+- Average Precision (AP)
+- Mean Average Precision (MAP)
+- nDCG
+- Mean Reciprocal Rank (MRR)
 
-The following files will be generated inside the output folder:
+Evaluation performed for **k = 1 to 10** using the Cranfield Dataset. :contentReference[oaicite:2]{index=2}
 
-    segmented_queries.txt
-    tokenized_queries.txt
-    reduced_queries.txt
-    stopword_removed_queries.txt
+---
 
-    segmented_docs.txt
-    tokenized_docs.txt
-    reduced_docs.txt
-    stopword_removed_docs.txt
+## Experimental Results
 
+Average evaluation metrics include:
 
-Dependencies
-------------
+| Metric | Description |
+|---------|-------------|
+| Precision@k | Relevance among retrieved documents |
+| Recall@k | Fraction of relevant documents retrieved |
+| F0.5 Score | Precision-weighted harmonic mean |
+| MAP | Mean Average Precision |
+| nDCG | Normalized Discounted Cumulative Gain |
+| MRR | Mean Reciprocal Rank |
 
-Install required libraries:
+The report also includes evaluation plots illustrating metric variation with increasing values of **k**. :contentReference[oaicite:3]{index=3}
 
-    pip install nltk spacy
+---
 
-Download required NLTK resources:
+## Observations
 
-    python -m nltk.downloader punkt
-    python -m nltk.downloader stopwords
-    python -m nltk.downloader wordnet
+- Precision decreases as more documents are retrieved.
+- Recall increases with larger values of *k*.
+- MAP improves gradually as additional relevant documents are retrieved.
+- nDCG remains relatively stable, indicating consistent ranking quality.
+- High MRR indicates that relevant documents are often ranked near the top. :contentReference[oaicite:4]{index=4}
 
-Download spaCy model:
+---
 
-    python -m spacy download en_core_web_sm
+## Runtime
 
+Total execution time for indexing, retrieval, and evaluation:
 
-Notes
------
+```
+13.7083 seconds
+```
 
-- Trailing slash in dataset path is NOT required.
-- Output folder is created automatically.
-- All preprocessing steps follow:
-    Sentence Segmentation → Tokenization → Inflection Reduction → Stopword Removal
+:contentReference[oaicite:5]{index=5}
+
+---
+
+## Technologies Used
+
+- Python
+- NumPy
+- scikit-learn
+- SciPy
+- Matplotlib
+
+---
+
+## Dataset
+
+- Cranfield Collection
+- Cranfield Query Set
+- Cranfield Relevance Judgments (qrels)
+
+---
+
+## Learning Outcomes
+
+This project demonstrates:
+
+- Information Retrieval fundamentals
+- Vector Space Model (VSM)
+- TF-IDF weighting
+- Inverted Index construction
+- Cosine Similarity ranking
+- IR evaluation metrics
+- Query analysis and retrieval effectiveness
+
+---
+
+## Report
+
+A detailed report describing the implementation, mathematical formulation, evaluation metrics, experimental results, and analysis is included in this repository.
